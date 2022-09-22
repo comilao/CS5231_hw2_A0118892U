@@ -1,0 +1,7 @@
+Commit: 4325bc17418e275e801545d27618c5efc162ada5
+--- save latest snapshot
+--- check SID file
+# SID: /home/student/git_repos/judgetools/wrkdir/git/SID
+SID check failed: 13. It is invalid / changed.
+Expected SID is e0924668:
+Plase make sure your SID is valid. Evaluation Stop.
