@@ -1,0 +1,102 @@
+Commit: 3d7bfa4a3866134581b2ce46fa8b8273014e3839
+--- save latest snapshot
+--- check SID file
+# SID: /home/student/git_repos/judgetools/wrkdir/git/SID
+-------- Setup --------
+--- copy SID file
+--- generate PartA vulnerable programs
+--- copying exploit*.c, exploit7-file/stdin
+--- make under /home/student/TA/PartA/exploits/
+gcc -ggdb -m32   -c -o exploit1.o exploit1.c
+gcc -m32 -L/usr/lib32  exploit1.o   -o exploit1
+gcc -ggdb -m32   -c -o exploit2.o exploit2.c
+gcc -m32 -L/usr/lib32  exploit2.o   -o exploit2
+gcc -ggdb -m32   -c -o exploit3.o exploit3.c
+gcc -m32 -L/usr/lib32  exploit3.o   -o exploit3
+gcc -ggdb -m32   -c -o exploit4.o exploit4.c
+gcc -m32 -L/usr/lib32  exploit4.o   -o exploit4
+gcc -ggdb -m32   -c -o exploit5.o exploit5.c
+gcc -m32 -L/usr/lib32  exploit5.o   -o exploit5
+gcc -ggdb -m32   -c -o exploit6.o exploit6.c
+gcc -m32 -L/usr/lib32  exploit6.o   -o exploit6
+rm -f /tmp/exploit7-file /tmp/exploit7-stdin
+cp exploit7-file exploit7-stdin /tmp/
+--- for sudo: extract YOUR_SOLUTION and generate sudo_exploit1.sh
+--- for sudo: extract YOUR_SOLUTION and generate sudo_exploit2.sh
+rm -f /tmp/exploit7-file /tmp/exploit7-stdin
+cp exploit7-file exploit7-stdin /tmp/
+-------- Judge --------
+[sudo] password for student: 0
+--- ASLR disabled
+======= Case PartA-1 =======
+--- execute /home/student/TA/PartA/exploits/exploit1 (e0924668:)
+Case PartA-1 evaluated. SUCCESS
+
+======= Case PartA-2 =======
+--- execute /home/student/TA/PartA/exploits/exploit2 (e0924668:)
+Case PartA-2 evaluated. SUCCESS
+
+======= Case PartA-3 =======
+--- execute /home/student/TA/PartA/exploits/exploit3 (e0924668:)
+Case PartA-3 evaluated. SUCCESS
+
+======= Case PartA-4 =======
+--- execute /home/student/TA/PartA/exploits/exploit4 (e0924668:)
+Case PartA-4 evaluated. SUCCESS
+
+======= Case PartA-5 =======
+--- execute /home/student/TA/PartA/exploits/exploit5 (e0924668:)
+Case PartA-5 evaluated. SUCCESS
+
+======= Case PartA-6 =======
+--- execute /home/student/TA/PartA/exploits/exploit6 (e0924668:)
+Case PartA-6 evaluated. FAIL
+
+======= Case PartA-7 =======
+--- execute command for program7 (e0924668:)
+--- write secret value to /home/victim/flag.txt
+--- run in sandbox (as victim): cat /tmp/exploit7-stdin | env -i /tmp/program7
+--- check if stdout contains secret in /home/victim/flag.txt
+Case PartA-7 evaluated. FAIL
+
+0
+--- ASLR disabled
+======= Case PartB-sudo-1 =======
+--- execute command for sudo_exploit1 (e0924668:)
+--- generate /tmp/test.sh and secret file /etc/rootsecret
+--- run in sandbox: ./sudo_exploit1.sh
+--- check if /tmp/test.log contains content of secret file
+  file does not exist: /tmp/test.log
+Case PartB-sudo-1 evaluated. FAIL
+
+2
+--- ASLR enabled
+======= Case PartB-sudo-2 =======
+--- execute command for sudo_exploit2 (e0924668:)
+--- generate /tmp/test.sh and secret file /etc/rootsecret
+--- run in sandbox: ./sudo_exploit2.sh
+--- check if /tmp/test.log contains content of secret file
+  file does not exist: /tmp/test.log
+Case PartB-sudo-2 evaluated. FAIL
+
+========== SUMMARY BEGIN ==========
+PartA-1 SUCCESS
+PartA-2 SUCCESS
+PartA-3 SUCCESS
+PartA-4 SUCCESS
+PartA-5 SUCCESS
+PartA-6 FAIL
+PartA-7 FAIL
+PartB-sudo-1 FAIL
+PartB-sudo-2 FAIL
+
+=========== SUMMARY END ===========
+
+Your final score will be based on SUCCESSful cases and the corresponding code, and explanations if required.
+Your code will be checked after the deadline. 
+
+Reminder on additional requirements checked after deadline (necessary conditions): 
+   all: no cheating.
+   program6: use return-to-libc.
+   program7: use ROP.
+   sudo-2: working with ASLR enabled.
